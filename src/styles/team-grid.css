@@ -1,0 +1,19 @@
+/* Team Grid Custom Positioning for Bottom 4 Cards */
+@media (min-width: 1280px) {
+  .team-card-6 {
+    grid-column: 2 / span 2;
+  }
+  
+  .team-card-7 {
+    grid-column: 4 / span 2;
+  }
+  
+  .team-card-8 {
+    grid-column: 6 / span 2;
+  }
+  
+  .team-card-9 {
+    grid-column: 8 / span 2;
+  }
+}
+
