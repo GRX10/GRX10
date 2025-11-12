@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 
 const RevenueSystem = () => {
   const [hoveredOps, setHoveredOps] = useState(null);
+  
+  const handleOpsClick = (opsName) => {
+    if (window.innerWidth < 1280) { // Below xl breakpoint
+      setHoveredOps(hoveredOps === opsName ? null : opsName);
+    }
+  };
 
   const opsDetails = {
     'RevOps': {
@@ -152,27 +158,27 @@ const RevenueSystem = () => {
             {/* Middle ring text - 5 Ops labels equally spaced - rotating counter-clockwise */}
             <g className="rotating-inner-text" style={{ animation: 'rotateCounterClockwise 60s linear infinite', transformOrigin: '350px 350px' }}>
               {/* RevOps - Position 1 (5%) */}
-              <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" className="cursor-pointer" onMouseEnter={() => setHoveredOps('RevOps')} onMouseLeave={() => setHoveredOps(null)}>
+              <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" className="cursor-pointer" onMouseEnter={() => setHoveredOps('RevOps')} onMouseLeave={() => setHoveredOps(null)} onClick={() => handleOpsClick('RevOps')}>
                 <textPath href="#middlePath" startOffset="5%" textAnchor="middle">RevOps</textPath>
               </text>
               
               {/* SupportOps - Position 2 (25%) */}
-              <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" className="cursor-pointer" onMouseEnter={() => setHoveredOps('SupportOps')} onMouseLeave={() => setHoveredOps(null)}>
+              <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" className="cursor-pointer" onMouseEnter={() => setHoveredOps('SupportOps')} onMouseLeave={() => setHoveredOps(null)} onClick={() => handleOpsClick('SupportOps')}>
                 <textPath href="#middlePath" startOffset="25%" textAnchor="middle">SupportOps</textPath>
               </text>
               
               {/* SalesOps - Position 3 (45%) */}
-              <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" className="cursor-pointer" onMouseEnter={() => setHoveredOps('SalesOps')} onMouseLeave={() => setHoveredOps(null)}>
+              <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" className="cursor-pointer" onMouseEnter={() => setHoveredOps('SalesOps')} onMouseLeave={() => setHoveredOps(null)} onClick={() => handleOpsClick('SalesOps')}>
                 <textPath href="#middlePath" startOffset="45%" textAnchor="middle">SalesOps</textPath>
               </text>
               
               {/* VoiceOps - Position 4 (65% - bottom right, rotated) */}
-              <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" transform="rotate(180 350 350)" className="cursor-pointer" onMouseEnter={() => setHoveredOps('VoiceOps')} onMouseLeave={() => setHoveredOps(null)}>
+              <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" transform="rotate(180 350 350)" className="cursor-pointer" onMouseEnter={() => setHoveredOps('VoiceOps')} onMouseLeave={() => setHoveredOps(null)} onClick={() => handleOpsClick('VoiceOps')}>
                 <textPath href="#middlePath" startOffset="35%" textAnchor="middle">VoiceOps</textPath>
               </text>
               
               {/* DemandOps - Position 5 (85% - bottom middle, rotated) */}
-              <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" transform="rotate(180 350 350)" className="cursor-pointer" onMouseEnter={() => setHoveredOps('DemandOps')} onMouseLeave={() => setHoveredOps(null)}>
+              <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" transform="rotate(180 350 350)" className="cursor-pointer" onMouseEnter={() => setHoveredOps('DemandOps')} onMouseLeave={() => setHoveredOps(null)} onClick={() => handleOpsClick('DemandOps')}>
                 <textPath href="#middlePath" startOffset="15%" textAnchor="middle">DemandOps</textPath>
               </text>
             </g>
@@ -203,26 +209,26 @@ const RevenueSystem = () => {
 
           {/* Info Popup Box */}
           {hoveredOps && (
-            <div className="absolute max-xl:left-1/2 max-xl:-translate-x-1/2 max-xl:top-[calc(100%+20px)] xl:left-[calc(50%+320px)] xl:top-1/2 xl:-translate-y-1/2 2xl:left-[calc(50%+340px)] bg-[#E1198B] text-white p-5 xl:p-6 rounded-2xl w-[90%] max-w-[400px] xl:w-[300px] 2xl:w-[380px] shadow-[0_20px_60px_rgba(0,0,0,0.5)] z-20 overflow-y-auto max-h-[85vh]">
-              <div className="flex justify-between items-start mb-4">
-                <h3 className="text-2xl font-bold">{opsDetails[hoveredOps].title}</h3>
+            <div className="absolute max-xl:left-1/2 max-xl:-translate-x-1/2 max-xl:top-[calc(100%+20px)] xl:left-[calc(50%+320px)] xl:top-1/2 xl:-translate-y-1/2 2xl:left-[calc(50%+340px)] bg-[#E1198B] text-white p-5 xl:p-6 rounded-2xl w-[90%] max-w-[400px] xl:w-[300px] 2xl:w-[380px] shadow-[0_20px_60px_rgba(0,0,0,0.5)] z-20">
+              <div className="flex justify-between items-start mb-3">
+                <h3 className="text-xl font-bold">{opsDetails[hoveredOps].title}</h3>
                 <button 
                   onClick={() => setHoveredOps(null)}
-                  className="text-white text-2xl font-bold hover:opacity-80"
+                  className="text-white text-xl font-bold hover:opacity-80"
                 >
                   ✕
                 </button>
               </div>
               
-              <div className="space-y-4 text-sm leading-relaxed">
+              <div className="space-y-2.5 text-xs sm:text-sm leading-relaxed">
                 <div>
-                  <p className="font-semibold mb-2">Purpose:</p>
+                  <p className="font-semibold mb-1">Purpose:</p>
                   <p>{opsDetails[hoveredOps].purpose}</p>
                 </div>
                 
                 {opsDetails[hoveredOps].whatItDoes.length > 0 && (
                   <div>
-                    <p className="font-semibold mb-2">What It Does:</p>
+                    <p className="font-semibold mb-1">What It Does:</p>
                     <ul className="space-y-1 pl-4">
                       {opsDetails[hoveredOps].whatItDoes.map((item, idx) => (
                         <li key={idx} className="flex items-start">
@@ -238,18 +244,18 @@ const RevenueSystem = () => {
                   <div>
                     {opsDetails[hoveredOps].outputs && (
                       <>
-                        <p className="font-semibold mb-2">Outputs:</p>
+                        <p className="font-semibold mb-1">Outputs:</p>
                         <p>{opsDetails[hoveredOps].outputs}</p>
                       </>
                     )}
                     {opsDetails[hoveredOps].poweredBy && (
-                      <p className="mt-2 text-xs italic">Powered by: {opsDetails[hoveredOps].poweredBy}</p>
+                      <p className="mt-1.5 text-xs italic">Powered by: {opsDetails[hoveredOps].poweredBy}</p>
                     )}
                   </div>
                 )}
                 
                 <div>
-                  <p className="font-semibold mb-2">Metrics:</p>
+                  <p className="font-semibold mb-1">Metrics:</p>
                   <ul className="space-y-1 pl-4">
                     {opsDetails[hoveredOps].metrics.map((metric, idx) => (
                       <li key={idx} className="flex items-start">
