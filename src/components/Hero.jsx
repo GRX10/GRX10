@@ -25,7 +25,7 @@ const Hero = () => {
             <span className="text-[#585858]">We build </span>
             <span className="text-[#E1198B]">Revenue.</span>
           </h1>
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-[1.3rem] mb-8 md:mb-12 text-[#a0a0a0] max-w-[700px] mx-auto">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-[1.3rem] mb-8 md:mb-12 text-[#ffffff] max-w-[700px] mx-auto">
             Engineered by people who've done it before. Shaped by real operators.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center items-stretch sm:items-center">

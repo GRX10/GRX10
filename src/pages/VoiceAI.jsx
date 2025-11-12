@@ -205,7 +205,12 @@ const VoiceAI = () => {
                   
                   {/* Content */}
                   <div>
-                    <p className="text-[#E1198B] font-semibold text-sm mb-2">{useCase.category}</p>
+                    <div className="inline-block mb-4 px-6 py-2 rounded-full bg-black border-2 border-transparent relative"
+                         style={{
+                           background: 'linear-gradient(#141414, #141414) padding-box, linear-gradient(90deg, #8338ec 0%, #E1198B 100%) border-box'
+                         }}>
+                      <p className="text-white font-semibold text-sm">{useCase.category}</p>
+                    </div>
                     <h3 className="text-2xl md:text-3xl mb-4 text-white font-bold">
                       {index + 1}. {useCase.title}
                     </h3>

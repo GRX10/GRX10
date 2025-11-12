@@ -7,7 +7,7 @@ const TeamSection = () => {
     { name: "Sai", role: "COO" },
     { name: "Yamuna", role: "Head of Growth" },
     { name: "Arvind", role: "Head of Design" },
-    { name: "Damu", role: "Head of Development" },
+    { name: "Damodaran", role: "Head of Development" },
     { name: "Yash", role: "SMM" },
     { name: "Azim", role: "Head of Sales" },
     { name: "Archana", role: "Head of Sales" }
