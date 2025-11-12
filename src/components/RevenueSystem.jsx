@@ -88,7 +88,7 @@ const RevenueSystem = () => {
           Five modules. One backbone. Every layer measurable. Every number connected to revenue.
         </p>
         
-        <div className={`mt-8 md:mt-12 flex justify-center items-center min-h-[500px] md:min-h-[700px] py-8 md:py-12 relative ${hoveredOps ? 'mb-[450px] lg:mb-0' : ''}`}>
+        <div className={`mt-8 md:mt-12 flex justify-center items-center min-h-[500px] md:min-h-[700px] py-8 md:py-12 relative ${hoveredOps ? 'mb-[450px] xl:mb-0' : ''}`}>
           <div className="relative flex justify-center items-center w-full revenue-diagram-container">
             <svg className="w-[340px] h-[340px] sm:w-[380px] sm:h-[380px] md:w-[450px] md:h-[450px] lg:w-[520px] lg:h-[520px] xl:w-[600px] xl:h-[600px]" viewBox="0 0 700 700" preserveAspectRatio="xMidYMid meet">
             <defs>
@@ -203,7 +203,7 @@ const RevenueSystem = () => {
 
           {/* Info Popup Box */}
           {hoveredOps && (
-            <div className="absolute lg:left-[calc(50%+260px)] xl:left-[calc(50%+350px)] lg:top-1/2 lg:-translate-y-1/2 lg:right-4 max-lg:left-1/2 max-lg:-translate-x-1/2 max-lg:top-[calc(100%+20px)] bg-[#E1198B] text-white p-6 lg:p-8 rounded-2xl w-[90%] max-w-[450px] lg:w-auto lg:min-w-[420px] shadow-[0_20px_60px_rgba(0,0,0,0.5)] z-20 overflow-y-auto max-h-[80vh]">
+            <div className="absolute max-xl:left-1/2 max-xl:-translate-x-1/2 max-xl:top-[calc(100%+20px)] xl:left-[calc(50%+320px)] xl:top-1/2 xl:-translate-y-1/2 2xl:left-[calc(50%+340px)] bg-[#E1198B] text-white p-5 xl:p-6 rounded-2xl w-[90%] max-w-[400px] xl:w-[300px] 2xl:w-[380px] shadow-[0_20px_60px_rgba(0,0,0,0.5)] z-20 overflow-y-auto max-h-[85vh]">
               <div className="flex justify-between items-start mb-4">
                 <h3 className="text-2xl font-bold">{opsDetails[hoveredOps].title}</h3>
                 <button 
