@@ -22,7 +22,7 @@ const VoiceAI = () => {
     },
     {
       title: 'WhatsApp & Multi-Channel',
-      description: 'Seamless integration with WhatsApp, Telegram, and other channels. Seamlessly manages customer journeys across platforms with a unified conversation context.'
+      description: 'Native integration with WhatsApp, Telegram, and voice channels. Seamlessly orchestrate customer journeys across platforms with unified conversation context.'
     },
     {
       title: 'CRM & System Integration',
@@ -67,19 +67,19 @@ const VoiceAI = () => {
   const engineeringSpecs = [
     {
       title: 'End-to-End Latency',
-      description: '400ms from speech-to-text, 200ms for AI processing, and 100ms for text-to-speech. Our 700ms cognitive response time allows for natural, human-like conversations.'
+      description: '700ms from voice input to voice output, including transcription, LLM processing, and synthesis. Within human cognitive response times for careful, important conversations. '
     },
     {
       title: 'Uptime SLA',
-      description: '99.9% guaranteed availability with a robust and resilient backend.'
+      description: '99.7% production-grade reliability with automatic failover and load balancing.'
     },
     {
       title: 'Languages',
-      description: 'Supports 10+ languages with multilingual voice synthesis and understanding, across major Indian languages.'
+      description: '40+ languages with native-quality voice synthesis and understanding across major languages.'
     },
     {
-      title: 'VAD',
-      description: 'Voice Activity Detection (VAD) for accurate speech detection and noise filtering.'
+      title: 'VAD Detection',
+      description: '<50ms lightning-fast voice activity detection prevents interruptions and overlaps.'
     }
   ];
 
@@ -106,7 +106,7 @@ const VoiceAI = () => {
           <p className="text-xl sm:text-2xl md:text-3xl mb-8 text-white font-semibold">
             Conversational AI that's actually human.
           </p>
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl mb-12 text-[#a0a0a0] max-w-[800px] mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl mb-12 text-[#ffffff] max-w-[800px] mx-auto leading-relaxed">
             Ultra low 700ms latency - within human reaction times for cognitive, careful responses. 
             The perfect balance for important conversations that feel completely natural.
           </p>
@@ -214,7 +214,7 @@ const VoiceAI = () => {
                     <h3 className="text-2xl md:text-3xl mb-4 text-white font-bold">
                       {index + 1}. {useCase.title}
                     </h3>
-                    <p className="text-[#a0a0a0] text-base md:text-lg mb-6 leading-relaxed">
+                    <p className="text-white text-base md:text-lg mb-6 leading-relaxed">
                       {useCase.description}
                     </p>
                     
@@ -233,7 +233,7 @@ const VoiceAI = () => {
                       <ul className="space-y-2">
                         {useCase.results.map((result, idx) => (
                           <li key={idx} className="text-white text-base leading-relaxed flex items-start">
-                            <span className="text-[#E1198B] mr-2">•</span>
+                            <span className="text-[#ffffff] mr-2">•</span>
                             {result}
                           </li>
                         ))}

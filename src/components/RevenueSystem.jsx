@@ -90,7 +90,7 @@ const RevenueSystem = () => {
         
         <div className={`mt-8 md:mt-12 flex justify-center items-center min-h-[500px] md:min-h-[700px] py-8 md:py-12 relative ${hoveredOps ? 'mb-[450px] lg:mb-0' : ''}`}>
           <div className="relative flex justify-center items-center w-full revenue-diagram-container">
-            <svg className="w-[280px] h-[280px] sm:w-[340px] sm:h-[340px] md:w-[450px] md:h-[450px] lg:w-[520px] lg:h-[520px] xl:w-[600px] xl:h-[600px]" viewBox="0 0 700 700" preserveAspectRatio="xMidYMid meet">
+            <svg className="w-[340px] h-[340px] sm:w-[380px] sm:h-[380px] md:w-[450px] md:h-[450px] lg:w-[520px] lg:h-[520px] xl:w-[600px] xl:h-[600px]" viewBox="0 0 700 700" preserveAspectRatio="xMidYMid meet">
             <defs>
               {/* Define paths for curved text */}
               <path id="outerPath" d="M 350,40 A 310,310 0 1,1 349.9,40" fill="none" />

@@ -2,7 +2,7 @@ import React from 'react';
 
 const Hero = () => {
   return (
-    <section id="home" className="relative bg-dark-bg py-16 md:py-24 lg:py-32 text-center overflow-visible">
+    <section id="home" className="relative bg-dark-bg py-20 md:py-24 lg:py-32 text-center overflow-visible min-h-screen md:min-h-0 flex items-center">
       {/* Background Gradient Effect - Purple glow from right */}
       <div className="absolute right-[-15%] top-1/2 -translate-y-1/2 w-[700px] h-[700px] pointer-events-none z-0"
            style={{
@@ -11,7 +11,7 @@ const Hero = () => {
            }}>
       </div>
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-5 sm:px-6 md:px-8 lg:px-10">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-5 sm:px-6 md:px-8 lg:px-10 w-full">
         <div className="hero-content">
           <h1 className="text-4xl sm:text-5xl md:text-[2.5rem] lg:text-6xl xl:text-[5rem] mb-6 font-bold leading-tight">
             <span className="text-[#585858]">We build </span>

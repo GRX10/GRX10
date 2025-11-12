@@ -18,9 +18,19 @@ const CredibilitySection = () => {
       result: "Doubled qualified inbound interest within six months."
     },
     {
-      title: "Growth Private Equity",
-      description: "Transformed sales collaboration with integrated CRM workflows, data enrichment pipelines, and real-time reporting dashboards.",
-      result: "Unified sales operations and accelerated deal cycles by 35%."
+      title: "Green Hydrogen Pioneer ",
+      description: "Translated founder’s vision into a coherent sales narrative supported by high-end collateral and digital presence.",
+      result: "unified messaging, shorter enterprise sales cycles."
+    },
+    {
+      title: "Energy Tech Firm ",
+      description: "Managed go-to-market with ABM, AI-driven performance marketing, and conversion analytics.",
+      result: "predictable pipeline across US markets."
+    },
+    {
+      title: "Personal Guidance SaaS Platform ",
+      description: "Owned revenue generation through positioning,  AI learning loops, and post-sale data integration.",
+      result: "measurable ROI and increased share in target financial verticals."
     }
   ];
 
@@ -54,7 +64,7 @@ const CredibilitySection = () => {
                 {card.description}
               </p>
               <div className="mt-6">
-                <span className="text-primary-pink font-semibold text-[0.95rem] block mb-2">
+                <span className="text-[#E1198B] font-semibold text-[0.95rem] block mb-2">
                   Result:
                 </span>
                 <p className="text-white text-[0.95rem] m-0 leading-relaxed">

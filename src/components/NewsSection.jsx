@@ -1,21 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const NewsSection = () => {
+  const [selectedVideo, setSelectedVideo] = useState(null);
+
   const newsItems = [
     {
       title: "Solar Installation and Commissioning: Revolutionizing Speed and Customer Experience",
       date: "05 November 24",
-      description: "How we're transforming the solar industry with AI-powered operations and customer-first design."
+      description: "In this fascinating discussion, we sit down with Shailendra Nair, Head of Operations at Atria Renewable, to uncover how his team is redefining the standards of solar installations.",
+      image: "/solar-installation.png",
+      videoUrl: "https://www.youtube.com/embed/PMhZ30sEYY8?start=1"
     },
     {
       title: "Podcast - Melooha",
       date: "05 September 24",
-      description: "Deep dive into building revenue systems that scale - from first principle to execution."
+      description: "Listen to Vikram Labhe, CEO – Melooha describe his journey from the silicon valley, his journey that started from the world of Astrology, and his quest to apply deep tech to an ancient belief. ",
+      image: "/podcast-melooha.png",
+      videoUrl: "https://www.youtube.com/embed/dgwMSUjQ1Gc?start=1"
     },
     {
-      title: "Everything about so 2024",
+      title: "Everthing about solar in India in 2024",
       date: "09 May 24",
-      description: "Our take on what's working in growth, AI, and revenue operations in 2024."
+      description: "Listen to Prem and Sriram talk Solar energy in India, the current trends and tribulations of a beleaguered industry witnessing a phenomenal growth recetly.",
+      image: "/solar-india-2024.png",
+      videoUrl: "https://www.youtube.com/embed/suCMrxVr_VY"
     }
   ];
 
@@ -35,7 +43,24 @@ const NewsSection = () => {
               key={index} 
               className="bg-dark-card rounded-xl overflow-hidden border border-white/10 transition-transform duration-300 hover:-translate-y-1"
             >
-              <div className="w-full h-[200px] bg-gradient-to-br from-[rgba(225,25,139,0.3)] to-[rgba(131,56,236,0.3)]"></div>
+              <div 
+                className="w-full h-[200px] overflow-hidden cursor-pointer relative group"
+                onClick={() => setSelectedVideo(item.videoUrl)}
+              >
+                <img 
+                  src={item.image} 
+                  alt={item.title} 
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+                {/* Play button overlay */}
+                <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/50 transition-colors duration-300">
+                  <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <svg className="w-8 h-8 text-[#E1198B] ml-1" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
               <div className="p-6 md:p-8">
                 <h3 className="text-lg md:text-[1.3rem] mb-3 text-white leading-snug">
                   {item.title}
@@ -51,6 +76,40 @@ const NewsSection = () => {
           ))}
         </div>
       </div>
+
+      {/* Video Popup Modal */}
+      {selectedVideo && (
+        <div 
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+          onClick={() => setSelectedVideo(null)}
+        >
+          <div 
+            className="relative w-full max-w-5xl aspect-video bg-black rounded-lg overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setSelectedVideo(null)}
+              className="absolute top-4 right-4 z-10 w-10 h-10 bg-white/90 hover:bg-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+              aria-label="Close video"
+            >
+              <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            
+            {/* YouTube iframe */}
+            <iframe
+              className="w-full h-full"
+              src={selectedVideo}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
