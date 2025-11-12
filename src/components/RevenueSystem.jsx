@@ -65,20 +65,18 @@ const RevenueSystem = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 relative overflow-hidden">
+    <section className="py-12 md:py-16 relative overflow-visible">
       {/* Background Gradient Effect - Purple glow from bottom-left */}
-      <div className="absolute left-[-10%] bottom-[-10%] w-[700px] h-[700px] pointer-events-none z-0"
+      <div className="absolute left-[-15%] bottom-[-15%] w-[600px] h-[600px] pointer-events-none z-0"
            style={{
-             background: 'radial-gradient(circle, rgba(131, 56, 236, 0.3) 0%, rgba(131, 56, 236, 0.15) 35%, transparent 65%)',
-             clipPath: 'inset(0 0 0 0)'
+             background: 'radial-gradient(circle, rgba(131, 56, 236, 0.4) 0%, rgba(131, 56, 236, 0.2) 30%, rgba(131, 56, 236, 0.1) 50%, transparent 70%)'
            }}>
       </div>
       
       {/* Background Gradient Effect - Pink glow from top-right */}
-      <div className="absolute right-[-10%] top-[-10%] w-[700px] h-[700px] pointer-events-none z-0"
+      <div className="absolute right-[-15%] top-[-15%] w-[600px] h-[600px] pointer-events-none z-0"
            style={{
-             background: 'radial-gradient(circle, rgba(225, 25, 139, 0.3) 0%, rgba(225, 25, 139, 0.15) 35%, transparent 65%)',
-             clipPath: 'inset(0 0 0 0)'
+             background: 'radial-gradient(circle, rgba(225, 25, 139, 0.4) 0%, rgba(225, 25, 139, 0.2) 30%, rgba(225, 25, 139, 0.1) 50%, transparent 70%)'
            }}>
       </div>
 
@@ -86,125 +84,126 @@ const RevenueSystem = () => {
         <h2 className="gradient-text text-3xl sm:text-4xl md:text-4xl lg:text-5xl text-center mb-4 font-bold">
           The GRX10 Revenue System
         </h2>
-        <p className="text-center text-white text-base sm:text-lg md:text-xl max-w-[700px] mx-auto my-4 mb-12 md:my-6 md:mb-16 leading-relaxed">
+        <p className="text-center text-white text-base sm:text-lg md:text-xl max-w-[700px] mx-auto my-3 mb-8 md:my-4 md:mb-12 leading-relaxed">
           Five modules. One backbone. Every layer measurable. Every number connected to revenue.
         </p>
         
-        <div className="mt-12 md:mt-20 flex justify-center items-center min-h-[400px] md:min-h-[700px] relative">
-          <div className="relative flex justify-center items-center w-full">
-            <svg className="w-[280px] h-[280px] sm:w-[340px] sm:h-[340px] md:w-[450px] md:h-[450px] lg:w-[520px] lg:h-[520px] xl:w-[600px] xl:h-[600px]" viewBox="0 0 700 700">
+        <div className={`mt-8 md:mt-12 flex justify-center items-center min-h-[500px] md:min-h-[700px] py-8 md:py-12 relative ${hoveredOps ? 'mb-[450px] lg:mb-0' : ''}`}>
+          <div className="relative flex justify-center items-center w-full revenue-diagram-container">
+            <svg className="w-[280px] h-[280px] sm:w-[340px] sm:h-[340px] md:w-[450px] md:h-[450px] lg:w-[520px] lg:h-[520px] xl:w-[600px] xl:h-[600px]" viewBox="0 0 700 700" preserveAspectRatio="xMidYMid meet">
             <defs>
               {/* Define paths for curved text */}
               <path id="outerPath" d="M 350,40 A 310,310 0 1,1 349.9,40" fill="none" />
               <path id="middlePath" d="M 350,130 A 220,220 0 1,1 349.9,130" fill="none" />
+              
+              {/* Masks to cut lines where text appears */}
+              <mask id="innerCircleMask">
+                <circle cx="350" cy="350" r="220" fill="white" stroke="white" strokeWidth="20" />
+                {/* Black areas will hide the line */}
+                <text fontSize="24" fontWeight="700" dominantBaseline="middle" fill="black" stroke="black" strokeWidth="10">
+                  <textPath href="#middlePath" startOffset="5%" textAnchor="middle">RevOps</textPath>
+                </text>
+                <text fontSize="24" fontWeight="700" dominantBaseline="middle" fill="black" stroke="black" strokeWidth="10">
+                  <textPath href="#middlePath" startOffset="25%" textAnchor="middle">SupportOps</textPath>
+                </text>
+                <text fontSize="24" fontWeight="700" dominantBaseline="middle" fill="black" stroke="black" strokeWidth="10">
+                  <textPath href="#middlePath" startOffset="45%" textAnchor="middle">SalesOps</textPath>
+                </text>
+                <text fontSize="24" fontWeight="700" dominantBaseline="middle" transform="rotate(180 350 350)" fill="black" stroke="black" strokeWidth="10">
+                  <textPath href="#middlePath" startOffset="35%" textAnchor="middle">VoiceOps</textPath>
+                </text>
+                <text fontSize="24" fontWeight="700" dominantBaseline="middle" transform="rotate(180 350 350)" fill="black" stroke="black" strokeWidth="10">
+                  <textPath href="#middlePath" startOffset="15%" textAnchor="middle">DemandOps</textPath>
+                </text>
+              </mask>
+              
+              <mask id="outerCircleMask">
+                <circle cx="350" cy="350" r="310" fill="white" stroke="white" strokeWidth="20" />
+                {/* Black areas will hide the line */}
+                <text fontSize="24" fontWeight="700" dominantBaseline="middle" fill="black" stroke="black" strokeWidth="10">
+                  <textPath href="#outerPath" startOffset="25%" textAnchor="middle">AI & Expertize</textPath>
+                </text>
+                <text fontSize="24" fontWeight="700" dominantBaseline="middle" fill="black" stroke="black" strokeWidth="10">
+                  <textPath href="#outerPath" startOffset="50%" textAnchor="middle">AI & Expertize</textPath>
+                </text>
+                <text fontSize="24" fontWeight="700" dominantBaseline="middle" transform="rotate(180 350 350)" fill="black" stroke="black" strokeWidth="10">
+                  <textPath href="#outerPath" startOffset="25%" textAnchor="middle">AI & Expertize</textPath>
+                </text>
+                <text fontSize="24" fontWeight="700" dominantBaseline="middle" transform="rotate(180 350 350)" fill="black" stroke="black" strokeWidth="10">
+                  <textPath href="#outerPath" startOffset="50%" textAnchor="middle">AI & Expertize</textPath>
+                </text>
+              </mask>
             </defs>
             
-            {/* Outer dashed circle */}
-            <circle cx="350" cy="350" r="310" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="1" strokeDasharray="8,8" />
+            {/* Outer dashed circle - rotating clockwise with mask */}
+            <g className="rotating-outer" style={{ animation: 'rotateClockwise 60s linear infinite', transformOrigin: '350px 350px' }}>
+              <circle cx="350" cy="350" r="310" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="1" strokeDasharray="8,8" mask="url(#outerCircleMask)" />
+            </g>
             
-            {/* Inner solid circle */}
-            <circle cx="350" cy="350" r="220" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="1" />
+            {/* Inner solid circle - rotating counter-clockwise with mask */}
+            <g className="rotating-inner" style={{ animation: 'rotateCounterClockwise 60s linear infinite', transformOrigin: '350px 350px' }}>
+              <circle cx="350" cy="350" r="220" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="1" mask="url(#innerCircleMask)" />
+            </g>
             
             {/* Center Revenue circle */}
-            <circle cx="350" cy="350" r="110" fill="#141414" stroke="rgba(255,255,255,0.6)" strokeWidth="1" />
+            <circle cx="350" cy="350" r="110" fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth="1" />
             <text x="350" y="365" textAnchor="middle" fill="#EC4899" fontSize="32" fontWeight="bold">Revenue</text>
             
-            {/* Middle ring text - 5 Ops labels equally spaced (20% apart each) */}
-            {/* RevOps - Position 1 (5%) */}
-            <text fontSize="24" fontWeight="700" dominantBaseline="middle" className="cursor-pointer" onMouseEnter={() => setHoveredOps('RevOps')} onMouseLeave={() => setHoveredOps(null)}>
-              <textPath href="#middlePath" startOffset="5%" textAnchor="middle">
-                <tspan fill="#141414" stroke="#141414" strokeWidth="12" paintOrder="stroke">RevOps</tspan>
-              </textPath>
-            </text>
-            <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" className="cursor-pointer" onMouseEnter={() => setHoveredOps('RevOps')} onMouseLeave={() => setHoveredOps(null)}>
-              <textPath href="#middlePath" startOffset="5%" textAnchor="middle">RevOps</textPath>
-            </text>
+            {/* Middle ring text - 5 Ops labels equally spaced - rotating counter-clockwise */}
+            <g className="rotating-inner-text" style={{ animation: 'rotateCounterClockwise 60s linear infinite', transformOrigin: '350px 350px' }}>
+              {/* RevOps - Position 1 (5%) */}
+              <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" className="cursor-pointer" onMouseEnter={() => setHoveredOps('RevOps')} onMouseLeave={() => setHoveredOps(null)}>
+                <textPath href="#middlePath" startOffset="5%" textAnchor="middle">RevOps</textPath>
+              </text>
+              
+              {/* SupportOps - Position 2 (25%) */}
+              <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" className="cursor-pointer" onMouseEnter={() => setHoveredOps('SupportOps')} onMouseLeave={() => setHoveredOps(null)}>
+                <textPath href="#middlePath" startOffset="25%" textAnchor="middle">SupportOps</textPath>
+              </text>
+              
+              {/* SalesOps - Position 3 (45%) */}
+              <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" className="cursor-pointer" onMouseEnter={() => setHoveredOps('SalesOps')} onMouseLeave={() => setHoveredOps(null)}>
+                <textPath href="#middlePath" startOffset="45%" textAnchor="middle">SalesOps</textPath>
+              </text>
+              
+              {/* VoiceOps - Position 4 (65% - bottom right, rotated) */}
+              <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" transform="rotate(180 350 350)" className="cursor-pointer" onMouseEnter={() => setHoveredOps('VoiceOps')} onMouseLeave={() => setHoveredOps(null)}>
+                <textPath href="#middlePath" startOffset="35%" textAnchor="middle">VoiceOps</textPath>
+              </text>
+              
+              {/* DemandOps - Position 5 (85% - bottom middle, rotated) */}
+              <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" transform="rotate(180 350 350)" className="cursor-pointer" onMouseEnter={() => setHoveredOps('DemandOps')} onMouseLeave={() => setHoveredOps(null)}>
+                <textPath href="#middlePath" startOffset="15%" textAnchor="middle">DemandOps</textPath>
+              </text>
+            </g>
             
-            {/* SupportOps - Position 2 (25%) */}
-            <text fontSize="24" fontWeight="700" dominantBaseline="middle" className="cursor-pointer" onMouseEnter={() => setHoveredOps('SupportOps')} onMouseLeave={() => setHoveredOps(null)}>
-              <textPath href="#middlePath" startOffset="25%" textAnchor="middle">
-                <tspan fill="#141414" stroke="#141414" strokeWidth="12" paintOrder="stroke">SupportOps</tspan>
-              </textPath>
-            </text>
-            <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" className="cursor-pointer" onMouseEnter={() => setHoveredOps('SupportOps')} onMouseLeave={() => setHoveredOps(null)}>
-              <textPath href="#middlePath" startOffset="25%" textAnchor="middle">SupportOps</textPath>
-            </text>
-            
-            {/* SalesOps - Position 3 (45%) */}
-            <text fontSize="24" fontWeight="700" dominantBaseline="middle" className="cursor-pointer" onMouseEnter={() => setHoveredOps('SalesOps')} onMouseLeave={() => setHoveredOps(null)}>
-              <textPath href="#middlePath" startOffset="45%" textAnchor="middle">
-                <tspan fill="#141414" stroke="#141414" strokeWidth="12" paintOrder="stroke">SalesOps</tspan>
-              </textPath>
-            </text>
-            <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" className="cursor-pointer" onMouseEnter={() => setHoveredOps('SalesOps')} onMouseLeave={() => setHoveredOps(null)}>
-              <textPath href="#middlePath" startOffset="45%" textAnchor="middle">SalesOps</textPath>
-            </text>
-            
-            {/* VoiceOps - Position 4 (65% - bottom right, rotated) */}
-            <text fontSize="24" fontWeight="700" dominantBaseline="middle" transform="rotate(180 350 350)" className="cursor-pointer" onMouseEnter={() => setHoveredOps('VoiceOps')} onMouseLeave={() => setHoveredOps(null)}>
-              <textPath href="#middlePath" startOffset="35%" textAnchor="middle">
-                <tspan fill="#141414" stroke="#141414" strokeWidth="12" paintOrder="stroke">VoiceOps</tspan>
-              </textPath>
-            </text>
-            <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" transform="rotate(180 350 350)" className="cursor-pointer" onMouseEnter={() => setHoveredOps('VoiceOps')} onMouseLeave={() => setHoveredOps(null)}>
-              <textPath href="#middlePath" startOffset="35%" textAnchor="middle">VoiceOps</textPath>
-            </text>
-            
-            {/* DemandOps - Position 5 (85% - bottom middle, rotated) */}
-            <text fontSize="24" fontWeight="700" dominantBaseline="middle" transform="rotate(180 350 350)" className="cursor-pointer" onMouseEnter={() => setHoveredOps('DemandOps')} onMouseLeave={() => setHoveredOps(null)}>
-              <textPath href="#middlePath" startOffset="15%" textAnchor="middle">
-                <tspan fill="#141414" stroke="#141414" strokeWidth="12" paintOrder="stroke">DemandOps</tspan>
-              </textPath>
-            </text>
-            <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" transform="rotate(180 350 350)" className="cursor-pointer" onMouseEnter={() => setHoveredOps('DemandOps')} onMouseLeave={() => setHoveredOps(null)}>
-              <textPath href="#middlePath" startOffset="15%" textAnchor="middle">DemandOps</textPath>
-            </text>
-            
-            {/* Outer labels - AI & Expertize curved text at 4 positions with background */}
-            {/* Top */}
-            <text fontSize="24" fontWeight="700" dominantBaseline="middle">
-              <textPath href="#outerPath" startOffset="25%" textAnchor="middle">
-                <tspan fill="#141414" stroke="#141414" strokeWidth="12" paintOrder="stroke">AI & Expertize</tspan>
-              </textPath>
-            </text>
-            <text fill="#8b7db8" fontSize="24" fontWeight="700" dominantBaseline="middle">
-              <textPath href="#outerPath" startOffset="25%" textAnchor="middle">AI & Expertize</textPath>
-            </text>
-            
-            {/* Right */}
-            <text fontSize="24" fontWeight="700" dominantBaseline="middle">
-              <textPath href="#outerPath" startOffset="50%" textAnchor="middle">
-                <tspan fill="#141414" stroke="#141414" strokeWidth="12" paintOrder="stroke">AI & Expertize</tspan>
-              </textPath>
-            </text>
-            <text fill="#8b7db8" fontSize="24" fontWeight="700" dominantBaseline="middle">
-              <textPath href="#outerPath" startOffset="50%" textAnchor="middle">AI & Expertize</textPath>
-            </text>
-            
-            {/* Bottom (rotated) */}
-            <text fontSize="24" fontWeight="700" dominantBaseline="middle" transform="rotate(180 350 350)">
-              <textPath href="#outerPath" startOffset="25%" textAnchor="middle">
-                <tspan fill="#141414" stroke="#141414" strokeWidth="12" paintOrder="stroke">AI & Expertize</tspan>
-              </textPath>
-            </text>
-            <text fill="#8b7db8" fontSize="24" fontWeight="700" dominantBaseline="middle" transform="rotate(180 350 350)">
-              <textPath href="#outerPath" startOffset="25%" textAnchor="middle">AI & Expertize</textPath>
-            </text>
-            
-            {/* Left (rotated) */}
-            <text fontSize="24" fontWeight="700" dominantBaseline="middle" transform="rotate(180 350 350)">
-              <textPath href="#outerPath" startOffset="50%" textAnchor="middle">
-                <tspan fill="#141414" stroke="#141414" strokeWidth="12" paintOrder="stroke">AI & Expertize</tspan>
-              </textPath>
-            </text>
-            <text fill="#8b7db8" fontSize="24" fontWeight="700" dominantBaseline="middle" transform="rotate(180 350 350)">
-              <textPath href="#outerPath" startOffset="50%" textAnchor="middle">AI & Expertize</textPath>
-            </text>
+            {/* Outer labels - AI & Expertize curved text at 4 positions - rotating clockwise */}
+            <g className="rotating-outer-text" style={{ animation: 'rotateClockwise 60s linear infinite', transformOrigin: '350px 350px' }}>
+              {/* Top */}
+              <text fill="#8b7db8" fontSize="24" fontWeight="700" dominantBaseline="middle">
+                <textPath href="#outerPath" startOffset="25%" textAnchor="middle">AI & Expertize</textPath>
+              </text>
+              
+              {/* Right */}
+              <text fill="#8b7db8" fontSize="24" fontWeight="700" dominantBaseline="middle">
+                <textPath href="#outerPath" startOffset="50%" textAnchor="middle">AI & Expertize</textPath>
+              </text>
+              
+              {/* Bottom (rotated) */}
+              <text fill="#8b7db8" fontSize="24" fontWeight="700" dominantBaseline="middle" transform="rotate(180 350 350)">
+                <textPath href="#outerPath" startOffset="25%" textAnchor="middle">AI & Expertize</textPath>
+              </text>
+              
+              {/* Left (rotated) */}
+              <text fill="#8b7db8" fontSize="24" fontWeight="700" dominantBaseline="middle" transform="rotate(180 350 350)">
+                <textPath href="#outerPath" startOffset="50%" textAnchor="middle">AI & Expertize</textPath>
+              </text>
+            </g>
           </svg>
 
           {/* Info Popup Box */}
           {hoveredOps && (
-            <div className="hidden lg:block absolute left-[calc(50%+350px)] top-1/2 -translate-y-1/2 bg-[#E1198B] text-white p-8 rounded-2xl w-[400px] shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
+            <div className="absolute lg:left-[calc(50%+350px)] lg:top-1/2 lg:-translate-y-1/2 max-lg:left-1/2 max-lg:-translate-x-1/2 max-lg:top-[calc(100%+20px)] bg-[#E1198B] text-white p-6 lg:p-8 rounded-2xl w-[90%] max-w-[400px] lg:w-[400px] shadow-[0_20px_60px_rgba(0,0,0,0.5)] z-20">
               <div className="flex justify-between items-start mb-4">
                 <h3 className="text-2xl font-bold">{opsDetails[hoveredOps].title}</h3>
                 <button 
@@ -266,6 +265,49 @@ const RevenueSystem = () => {
         </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes rotateClockwise {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+
+        @keyframes rotateCounterClockwise {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(-360deg);
+          }
+        }
+
+        .rotating-inner-text text:hover,
+        .rotating-outer-text text:hover {
+          cursor: pointer;
+        }
+
+        .rotating-inner-text text[fill="white"]:hover {
+          fill: #E1198B !important;
+        }
+
+        svg:has(.rotating-inner-text text:hover) .rotating-inner,
+        svg:has(.rotating-inner-text text:hover) .rotating-inner-text,
+        svg:has(.rotating-inner-text text:hover) .rotating-outer,
+        svg:has(.rotating-inner-text text:hover) .rotating-outer-text {
+          animation-play-state: paused !important;
+        }
+
+        svg:has(.rotating-outer-text text:hover) .rotating-outer,
+        svg:has(.rotating-outer-text text:hover) .rotating-outer-text,
+        svg:has(.rotating-outer-text text:hover) .rotating-inner,
+        svg:has(.rotating-outer-text text:hover) .rotating-inner-text {
+          animation-play-state: paused !important;
+        }
+      `}</style>
     </section>
   );
 };

@@ -12,8 +12,15 @@ const ClientsSlider = () => {
   ];
 
   return (
-    <section className="py-12 md:py-16 border-t border-b border-white/10 overflow-x-hidden">
-      <div className="w-full overflow-hidden relative py-4">
+    <section className="py-12 md:py-16 border-t border-b border-white/10 relative overflow-visible">
+      {/* Background Gradient Effect - Pink glow from left */}
+      <div className="absolute left-[-15%] top-1/2 -translate-y-1/2 w-[700px] h-[700px] pointer-events-none z-0"
+           style={{
+             background: 'radial-gradient(circle, rgba(225, 25, 139, 0.3) 0%, rgba(225, 25, 139, 0.15) 35%, transparent 65%)',
+             clipPath: 'inset(0 0 0 0)'
+           }}>
+      </div>
+      <div className="w-full overflow-hidden relative py-4 z-10">
         <div className="flex animate-[scroll_30s_linear_infinite] w-max hover:pause">
           {clients.map((client, index) => (
             <div 

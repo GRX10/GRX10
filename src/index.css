@@ -16,15 +16,18 @@ body {
   background: #141414;
   color: #ffffff;
     overflow-x: hidden;
+    overflow-y: visible;
 }
 
 #root {
   width: 100%;
+  overflow: visible;
 }
 
 html {
   scroll-behavior: smooth;
     overflow-x: hidden;
+    overflow-y: visible;
   }
 }
 

@@ -9,7 +9,7 @@ import CTASection from '../components/CTASection';
 
 function Home() {
   return (
-    <>
+    <div className="overflow-visible">
       <Hero />
       <ClientsSlider />
       <CredibilitySection />
@@ -17,7 +17,7 @@ function Home() {
       <RevenueSystem />
       <NewsSection />
       <CTASection />
-    </>
+    </div>
   );
 }
 

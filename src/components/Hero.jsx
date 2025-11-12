@@ -3,18 +3,10 @@ import React from 'react';
 const Hero = () => {
   return (
     <section id="home" className="relative bg-dark-bg py-16 md:py-24 lg:py-32 text-center overflow-visible">
-      {/* Background Gradient Effect - Purple glow from right near client slider */}
-      <div className="absolute right-[-15%] bottom-[-20%] w-[700px] h-[700px] pointer-events-none z-0"
+      {/* Background Gradient Effect - Purple glow from right */}
+      <div className="absolute right-[-15%] top-1/2 -translate-y-1/2 w-[700px] h-[700px] pointer-events-none z-0"
            style={{
              background: 'radial-gradient(circle, rgba(116, 101, 233, 0.3) 0%, rgba(116, 101, 233, 0.15) 35%, transparent 65%)',
-             clipPath: 'inset(0 0 0 0)'
-           }}>
-      </div>
-      
-      {/* Background Gradient Effect - Pink glow from left near client slider */}
-      <div className="absolute left-[-15%] bottom-[-20%] w-[700px] h-[700px] pointer-events-none z-0"
-           style={{
-             background: 'radial-gradient(circle, rgba(225, 25, 139, 0.3) 0%, rgba(225, 25, 139, 0.15) 35%, transparent 65%)',
              clipPath: 'inset(0 0 0 0)'
            }}>
       </div>

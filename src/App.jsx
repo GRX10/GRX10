@@ -8,14 +8,14 @@ import VoiceAI from './pages/VoiceAI';
 function App() {
   return (
     <Router>
-      <div className="w-full bg-dark-bg text-text-white relative">
+      <div className="w-full bg-dark-bg text-text-white relative overflow-visible">
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/voice-ai" element={<VoiceAI />} />
         </Routes>
         <Footer />
-      </div>
+          </div>
     </Router>
   );
 }

@@ -25,7 +25,7 @@ const CredibilitySection = () => {
   ];
 
   return (
-    <section className="py-16 md:py-24 overflow-hidden">
+    <section className="py-16 md:py-24 overflow-visible">
       <div className="max-w-[1400px] mx-auto px-5 sm:px-6 md:px-8 lg:px-10">
         <h2 className="gradient-text text-3xl sm:text-4xl md:text-4xl lg:text-5xl text-center mb-4 font-bold">
           Proven Credibility
