@@ -1,11 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const RevenueSystem = () => {
   const [hoveredOps, setHoveredOps] = useState(null);
   
+  // Set default popup for screens below 1024px
+  useEffect(() => {
+    if (window.innerWidth < 1024) {
+      setHoveredOps('RevOps');
+    }
+  }, []);
+  
   const handleOpsClick = (opsName) => {
-    if (window.innerWidth < 1280) { // Below xl breakpoint
-      setHoveredOps(hoveredOps === opsName ? null : opsName);
+    if (window.innerWidth < 1024) { // Below lg breakpoint
+      setHoveredOps(opsName); // Just change content, don't toggle
+    } else if (window.innerWidth < 1280) { // Between lg and xl
+      setHoveredOps(hoveredOps === opsName ? null : opsName); // Toggle on click
+    }
+  };
+  
+  const handleOpsHover = (opsName) => {
+    if (window.innerWidth >= 1280) { // Only hover on xl and above
+      setHoveredOps(opsName);
+    }
+  };
+  
+  const handleOpsLeave = () => {
+    if (window.innerWidth >= 1280) { // Only close on leave for xl and above
+      setHoveredOps(null);
     }
   };
 
@@ -158,27 +179,27 @@ const RevenueSystem = () => {
             {/* Middle ring text - 5 Ops labels equally spaced - rotating counter-clockwise */}
             <g className="rotating-inner-text" style={{ animation: 'rotateCounterClockwise 60s linear infinite', transformOrigin: '350px 350px' }}>
               {/* RevOps - Position 1 (5%) */}
-              <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" className="cursor-pointer" onMouseEnter={() => setHoveredOps('RevOps')} onMouseLeave={() => setHoveredOps(null)} onClick={() => handleOpsClick('RevOps')}>
+              <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" className="cursor-pointer" onMouseEnter={() => handleOpsHover('RevOps')} onMouseLeave={handleOpsLeave} onClick={() => handleOpsClick('RevOps')}>
                 <textPath href="#middlePath" startOffset="5%" textAnchor="middle">RevOps</textPath>
               </text>
               
               {/* SupportOps - Position 2 (25%) */}
-              <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" className="cursor-pointer" onMouseEnter={() => setHoveredOps('SupportOps')} onMouseLeave={() => setHoveredOps(null)} onClick={() => handleOpsClick('SupportOps')}>
+              <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" className="cursor-pointer" onMouseEnter={() => handleOpsHover('SupportOps')} onMouseLeave={handleOpsLeave} onClick={() => handleOpsClick('SupportOps')}>
                 <textPath href="#middlePath" startOffset="25%" textAnchor="middle">SupportOps</textPath>
               </text>
               
               {/* SalesOps - Position 3 (45%) */}
-              <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" className="cursor-pointer" onMouseEnter={() => setHoveredOps('SalesOps')} onMouseLeave={() => setHoveredOps(null)} onClick={() => handleOpsClick('SalesOps')}>
+              <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" className="cursor-pointer" onMouseEnter={() => handleOpsHover('SalesOps')} onMouseLeave={handleOpsLeave} onClick={() => handleOpsClick('SalesOps')}>
                 <textPath href="#middlePath" startOffset="45%" textAnchor="middle">SalesOps</textPath>
               </text>
               
               {/* VoiceOps - Position 4 (65% - bottom right, rotated) */}
-              <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" transform="rotate(180 350 350)" className="cursor-pointer" onMouseEnter={() => setHoveredOps('VoiceOps')} onMouseLeave={() => setHoveredOps(null)} onClick={() => handleOpsClick('VoiceOps')}>
+              <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" transform="rotate(180 350 350)" className="cursor-pointer" onMouseEnter={() => handleOpsHover('VoiceOps')} onMouseLeave={handleOpsLeave} onClick={() => handleOpsClick('VoiceOps')}>
                 <textPath href="#middlePath" startOffset="35%" textAnchor="middle">VoiceOps</textPath>
               </text>
               
               {/* DemandOps - Position 5 (85% - bottom middle, rotated) */}
-              <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" transform="rotate(180 350 350)" className="cursor-pointer" onMouseEnter={() => setHoveredOps('DemandOps')} onMouseLeave={() => setHoveredOps(null)} onClick={() => handleOpsClick('DemandOps')}>
+              <text fill="white" fontSize="24" fontWeight="700" dominantBaseline="middle" transform="rotate(180 350 350)" className="cursor-pointer" onMouseEnter={() => handleOpsHover('DemandOps')} onMouseLeave={handleOpsLeave} onClick={() => handleOpsClick('DemandOps')}>
                 <textPath href="#middlePath" startOffset="15%" textAnchor="middle">DemandOps</textPath>
               </text>
             </g>
@@ -214,7 +235,7 @@ const RevenueSystem = () => {
                 <h3 className="text-xl font-bold">{opsDetails[hoveredOps].title}</h3>
                 <button 
                   onClick={() => setHoveredOps(null)}
-                  className="text-white text-xl font-bold hover:opacity-80"
+                  className="text-white text-xl font-bold hover:opacity-80 hidden lg:block"
                 >
                   ✕
                 </button>
@@ -300,18 +321,21 @@ const RevenueSystem = () => {
           fill: #E1198B !important;
         }
 
-        svg:has(.rotating-inner-text text:hover) .rotating-inner,
-        svg:has(.rotating-inner-text text:hover) .rotating-inner-text,
-        svg:has(.rotating-inner-text text:hover) .rotating-outer,
-        svg:has(.rotating-inner-text text:hover) .rotating-outer-text {
-          animation-play-state: paused !important;
-        }
+        /* Pause rotation on hover only for screens 1024px and above */
+        @media (min-width: 1024px) {
+          svg:has(.rotating-inner-text text:hover) .rotating-inner,
+          svg:has(.rotating-inner-text text:hover) .rotating-inner-text,
+          svg:has(.rotating-inner-text text:hover) .rotating-outer,
+          svg:has(.rotating-inner-text text:hover) .rotating-outer-text {
+            animation-play-state: paused !important;
+          }
 
-        svg:has(.rotating-outer-text text:hover) .rotating-outer,
-        svg:has(.rotating-outer-text text:hover) .rotating-outer-text,
-        svg:has(.rotating-outer-text text:hover) .rotating-inner,
-        svg:has(.rotating-outer-text text:hover) .rotating-inner-text {
-          animation-play-state: paused !important;
+          svg:has(.rotating-outer-text text:hover) .rotating-outer,
+          svg:has(.rotating-outer-text text:hover) .rotating-outer-text,
+          svg:has(.rotating-outer-text text:hover) .rotating-inner,
+          svg:has(.rotating-outer-text text:hover) .rotating-inner-text {
+            animation-play-state: paused !important;
+          }
         }
       `}</style>
     </section>
