@@ -87,6 +87,15 @@ const RevenueSystem = () => {
       outputs: 'Brand lift, inbound leads, qualified top-of-funnel velocity.',
       poweredBy: 'CRM analytics, AI ad optimization, content engines.',
       metrics: ['Brand reach', 'Cost per Lead (CPL < 10%)', 'Qualified Lead Ratio (>35%)', '50% lower time to optimize creative & spend']
+    },
+    'AI & Expertize': {
+      title: 'AI & Expertize',
+      purpose: 'Each Ops function is powered by specific AI tools — Voice AI, Predictive AI, Campaign AI, Support AI.',
+      whatItDoes: [],
+      outputs: '',
+      poweredBy: '',
+      principle: 'Real data, not theoretical models — every insight loops back into operations.',
+      metrics: ['AI Automation Coverage (>70% of repeat tasks)', 'Feedback Loop Latency (<24 hours for campaign/sales/service learnings)']
     }
   };
 
@@ -206,22 +215,22 @@ const RevenueSystem = () => {
             {/* Outer labels - AI & Expertize curved text at 4 positions - rotating clockwise */}
             <g className="rotating-outer-text" style={{ animation: 'rotateClockwise 60s linear infinite', transformOrigin: '350px 350px' }}>
               {/* Top */}
-              <text fill="#8b7db8" fontSize="24" fontWeight="700" dominantBaseline="middle">
+              <text fill="#8b7db8" fontSize="24" fontWeight="700" dominantBaseline="middle" className="cursor-pointer" onMouseEnter={() => handleOpsHover('AI & Expertize')} onMouseLeave={handleOpsLeave} onClick={() => handleOpsClick('AI & Expertize')}>
                 <textPath href="#outerPath" startOffset="25%" textAnchor="middle">AI & Expertize</textPath>
               </text>
               
               {/* Right */}
-              <text fill="#8b7db8" fontSize="24" fontWeight="700" dominantBaseline="middle">
+              <text fill="#8b7db8" fontSize="24" fontWeight="700" dominantBaseline="middle" className="cursor-pointer" onMouseEnter={() => handleOpsHover('AI & Expertize')} onMouseLeave={handleOpsLeave} onClick={() => handleOpsClick('AI & Expertize')}>
                 <textPath href="#outerPath" startOffset="50%" textAnchor="middle">AI & Expertize</textPath>
               </text>
               
               {/* Bottom (rotated) */}
-              <text fill="#8b7db8" fontSize="24" fontWeight="700" dominantBaseline="middle" transform="rotate(180 350 350)">
+              <text fill="#8b7db8" fontSize="24" fontWeight="700" dominantBaseline="middle" transform="rotate(180 350 350)" className="cursor-pointer" onMouseEnter={() => handleOpsHover('AI & Expertize')} onMouseLeave={handleOpsLeave} onClick={() => handleOpsClick('AI & Expertize')}>
                 <textPath href="#outerPath" startOffset="25%" textAnchor="middle">AI & Expertize</textPath>
               </text>
               
               {/* Left (rotated) */}
-              <text fill="#8b7db8" fontSize="24" fontWeight="700" dominantBaseline="middle" transform="rotate(180 350 350)">
+              <text fill="#8b7db8" fontSize="24" fontWeight="700" dominantBaseline="middle" transform="rotate(180 350 350)" className="cursor-pointer" onMouseEnter={() => handleOpsHover('AI & Expertize')} onMouseLeave={handleOpsLeave} onClick={() => handleOpsClick('AI & Expertize')}>
                 <textPath href="#outerPath" startOffset="50%" textAnchor="middle">AI & Expertize</textPath>
               </text>
             </g>
@@ -274,12 +283,19 @@ const RevenueSystem = () => {
                   </div>
                 )}
                 
+                {opsDetails[hoveredOps].principle && (
+                  <div>
+                    <p className="font-semibold mb-1">Principle:</p>
+                    <p>{opsDetails[hoveredOps].principle}</p>
+                  </div>
+                )}
+                
                 <div>
                   <p className="font-semibold mb-1">Metrics:</p>
                   <ul className="space-y-1 pl-4">
                     {opsDetails[hoveredOps].metrics.map((metric, idx) => (
                       <li key={idx} className="flex items-start">
-                        <span className="mr-2">•</span>
+                        <span className="mr-2">→</span>
                         <span>{metric}</span>
                       </li>
                     ))}
@@ -317,6 +333,10 @@ const RevenueSystem = () => {
         }
 
         .rotating-inner-text text[fill="white"]:hover {
+          fill: #E1198B !important;
+        }
+
+        .rotating-outer-text text[fill="#8b7db8"]:hover {
           fill: #E1198B !important;
         }
 
