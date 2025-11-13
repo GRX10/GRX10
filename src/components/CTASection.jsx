@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+import ContactForm from './ContactForm';
 
 const CTASection = () => {
+  const [showContactForm, setShowContactForm] = useState(false);
+
   return (
     <section className="py-16 md:py-24 flex justify-center items-center">
       <div className="max-w-[1400px] mx-auto px-5 sm:px-6 md:px-8 lg:px-10 w-full">
@@ -12,11 +15,17 @@ const CTASection = () => {
           <p className="text-[#d1d5db] text-base sm:text-lg md:text-xl mb-6 md:mb-8 leading-relaxed max-w-[900px] mx-auto">
             Feel free to get in touch with us and we will get back to you in a day, Tops.
           </p>
-          <button className="mt-4 bg-[#E1198B] text-white border-none px-12 py-[1.1rem] text-lg font-semibold rounded-full cursor-pointer transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_25px_rgba(225,25,139,0.3)]">
+          <button 
+            onClick={() => setShowContactForm(true)}
+            className="mt-4 bg-[#E1198B] text-white border-none px-12 py-[1.1rem] text-lg font-semibold rounded-full cursor-pointer transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_25px_rgba(225,25,139,0.3)]"
+          >
             Get in touch
           </button>
         </div>
       </div>
+
+      {/* Contact Form Modal */}
+      <ContactForm isOpen={showContactForm} onClose={() => setShowContactForm(false)} />
     </section>
   );
 };

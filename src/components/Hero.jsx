@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+import ContactForm from './ContactForm';
 
 const Hero = () => {
+  const [showContactForm, setShowContactForm] = useState(false);
+
   return (
     <section id="home" className="relative bg-dark-bg py-20 md:py-24 lg:py-32 text-center overflow-visible min-h-screen md:min-h-0 flex items-center">
       {/* Background Gradient Effect - Purple glow from right */}
@@ -21,7 +24,10 @@ const Hero = () => {
             Engineered by people who've done it before. Shaped by real operators.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center items-stretch sm:items-center">
-            <button className="bg-[#E1198B] text-white border-none px-10 py-4 text-base font-semibold rounded-full cursor-pointer transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_25px_rgba(225,25,139,0.3)]">
+            <button 
+              onClick={() => setShowContactForm(true)}
+              className="bg-[#E1198B] text-white border-none px-10 py-4 text-base font-semibold rounded-full cursor-pointer transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_25px_rgba(225,25,139,0.3)]"
+            >
               Get in touch
             </button>
             {/* <button className="bg-transparent text-white border-2 border-white px-10 py-4 text-base font-semibold rounded-full cursor-pointer transition-all duration-300 hover:bg-[rgba(255,255,255,0.1)]">
@@ -30,6 +36,9 @@ const Hero = () => {
           </div>
         </div>
       </div>
+
+      {/* Contact Form Modal */}
+      <ContactForm isOpen={showContactForm} onClose={() => setShowContactForm(false)} />
     </section>
   );
 };
