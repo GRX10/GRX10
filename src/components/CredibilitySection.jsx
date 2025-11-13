@@ -104,8 +104,8 @@ const CredibilitySection = () => {
 
       <style jsx>{`
         @keyframes credibilityScroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+          0% { transform: translateX(-50%); }
+          100% { transform: translateX(0); }
         }
         .hover\\:pause:hover {
           animation-play-state: paused;

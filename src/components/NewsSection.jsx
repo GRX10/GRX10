@@ -24,6 +24,13 @@ const NewsSection = () => {
       description: "Listen to Prem and Sriram talk Solar energy in India, the current trends and tribulations of a beleaguered industry witnessing a phenomenal growth recetly.",
       image: "/solar-india-2024.png",
       videoUrl: "https://www.youtube.com/embed/suCMrxVr_VY"
+    },
+    {
+      title: "RevOps in the age of AI",
+      date: "29 July 2025",
+      description: "In this episode, we dive deep into the world of Revenue Operations (RevOps) — the strategy that's changing the way fast-growing teams align sales, marketing, and customer success. But does it actually work?",
+      image: "/revops-Podcast.png",
+      videoUrl: "https://www.youtube.com/embed/35_XbC2Iqwk?start=1"
     }
   ];
 
@@ -36,12 +43,51 @@ const NewsSection = () => {
         <p className="text-center text-white text-base sm:text-lg md:text-xl max-w-[900px] mx-auto my-4 mb-12 md:my-6 md:mb-16 leading-relaxed">
           Real conversations on scaling smarter, not just bigger.
         </p>
+      </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] lg:grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-6 md:gap-8 mt-12">
+      <div className="w-full overflow-hidden mt-12 py-8">
+        <div className="flex gap-6 md:gap-8 animate-[newsScroll_50s_linear_infinite] w-max hover:pause">
           {newsItems.map((item, index) => (
             <div 
               key={index} 
-              className="bg-dark-card rounded-xl overflow-hidden border border-white/10 transition-transform duration-300 hover:-translate-y-1"
+              className="bg-dark-card rounded-xl overflow-hidden border border-white/10 transition-transform duration-300 hover:-translate-y-1 min-w-[320px] max-w-[320px] sm:min-w-[360px] sm:max-w-[360px] md:min-w-[400px] md:max-w-[400px] lg:min-w-[420px] lg:max-w-[420px] flex-shrink-0"
+            >
+              <div 
+                className="w-full h-[200px] overflow-hidden cursor-pointer relative group"
+                onClick={() => setSelectedVideo(item.videoUrl)}
+              >
+                <img 
+                  src={item.image} 
+                  alt={item.title} 
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+                {/* Play button overlay */}
+                <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/50 transition-colors duration-300">
+                  <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <svg className="w-8 h-8 text-[#E1198B] ml-1" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div className="p-6 md:p-8">
+                <h3 className="text-lg md:text-[1.3rem] mb-3 text-white leading-snug">
+                  {item.title}
+                </h3>
+                <p className="text-[#E1198B] text-sm mb-4">
+                  {item.date}
+                </p>
+                <p className="text-white leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            </div>
+          ))}
+          {/* Duplicate for seamless loop */}
+          {newsItems.map((item, index) => (
+            <div 
+              key={`duplicate-${index}`} 
+              className="bg-dark-card rounded-xl overflow-hidden border border-white/10 transition-transform duration-300 hover:-translate-y-1 min-w-[320px] max-w-[320px] sm:min-w-[360px] sm:max-w-[360px] md:min-w-[400px] md:max-w-[400px] lg:min-w-[420px] lg:max-w-[420px] flex-shrink-0"
             >
               <div 
                 className="w-full h-[200px] overflow-hidden cursor-pointer relative group"
@@ -110,6 +156,16 @@ const NewsSection = () => {
           </div>
         </div>
       )}
+
+      <style jsx>{`
+        @keyframes newsScroll {
+          0% { transform: translateX(-50%); }
+          100% { transform: translateX(0); }
+        }
+        .hover\\:pause:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
     </section>
   );
 };

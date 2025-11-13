@@ -1,4 +1,14 @@
-/* Team Grid Custom Positioning for Bottom 4 Cards */
+/* Team Carousel Animation */
+@keyframes teamScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.hover\:pause:hover {
+  animation-play-state: paused;
+}
+
+/* Old Team Grid Custom Positioning - keeping for reference but not used in carousel */
 @media (min-width: 1280px) {
   .team-card-6 {
     grid-column: 2 / span 2;
@@ -16,4 +26,3 @@
     grid-column: 8 / span 2;
   }
 }
-

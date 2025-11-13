@@ -24,9 +24,9 @@ const Hero = () => {
             <button className="bg-[#E1198B] text-white border-none px-10 py-4 text-base font-semibold rounded-full cursor-pointer transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_25px_rgba(225,25,139,0.3)]">
               Get in touch
             </button>
-            <button className="bg-transparent text-white border-2 border-white px-10 py-4 text-base font-semibold rounded-full cursor-pointer transition-all duration-300 hover:bg-[rgba(255,255,255,0.1)]">
+            {/* <button className="bg-transparent text-white border-2 border-white px-10 py-4 text-base font-semibold rounded-full cursor-pointer transition-all duration-300 hover:bg-[rgba(255,255,255,0.1)]">
               Learn more
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
