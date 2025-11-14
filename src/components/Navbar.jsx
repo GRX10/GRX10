@@ -63,7 +63,7 @@ const Navbar = () => {
               Voice AI
             </Link>
           </li>
-          <li>
+          {/* <li>
             <a 
               href="#about" 
               className="no-underline text-white font-medium text-base transition-colors duration-300 hover:text-[#E1198B] max-md:text-2xl" 
@@ -71,7 +71,7 @@ const Navbar = () => {
             >
               About
             </a>
-          </li>
+          </li> */}
         </ul>
 
         {/* Contact Button */}
