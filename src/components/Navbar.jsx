@@ -104,12 +104,12 @@ const Navbar = () => {
         </ul>
 
         {/* Contact Button */}
-        <button 
-          onClick={() => setShowContactForm(true)}
-          className="hidden md:block bg-[#E1198B] text-white border-none px-7 py-[0.75rem] text-[0.95rem] font-semibold rounded-full cursor-pointer transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_25px_rgba(225,25,139,0.3)]"
+        <Link 
+          to="/contact-us"
+          className="hidden md:block bg-[#E1198B] text-white border-none px-7 py-[0.75rem] text-[0.95rem] font-semibold rounded-full cursor-pointer transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_25px_rgba(225,25,139,0.3)] no-underline"
         >
           Contact us
-        </button>
+        </Link>
       </div>
 
       {/* Contact Form Modal */}

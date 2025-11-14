@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import VoiceAI from './pages/VoiceAI';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import LegalDisclaimer from './pages/LegalDisclaimer';
+import ContactUs from './pages/ContactUs';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/voice-ai" element={<VoiceAI />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/legal-disclaimer" element={<LegalDisclaimer />} />
+          <Route path="/contact-us" element={<ContactUs />} />
         </Routes>
         <Footer />
           </div>

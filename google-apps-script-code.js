@@ -64,6 +64,66 @@ This email was automatically generated from the GRX10 website contact form.
 }
 
 /**
+ * Helper function to send email with message field (for Contact Us page)
+ */
+function sendContactEmailWithMessage(name, phone, organizationName, organizationEmail, message) {
+  try {
+    Logger.log('=== sendContactEmailWithMessage called ===');
+    Logger.log('Parameters: name=' + name + ', phone=' + phone + ', org=' + organizationName + ', email=' + organizationEmail + ', message=' + message);
+    
+    const recipientEmail = 'omkar@grx10.com';
+    const ccEmail = 'omkar8290@gmail.com';
+    const subject = 'New Contact Us Form Submission - GRX10 Website';
+    
+    // Validate email before using as replyTo
+    let replyToEmail = organizationEmail;
+    if (!replyToEmail || replyToEmail === 'undefined' || replyToEmail === 'Not provided' || !replyToEmail.includes('@')) {
+      Logger.log('Invalid replyTo email, using recipientEmail instead');
+      replyToEmail = recipientEmail;
+    }
+    
+    const body = `
+You have received a new contact form submission from the GRX10 website:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Name: ${name}
+
+Email: ${organizationEmail}
+
+Phone: ${phone}
+
+${message ? `Message:\n${message}` : ''}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+This email was automatically generated from the GRX10 website contact form.
+    `.trim();
+    
+    Logger.log('Attempting to send email...');
+    Logger.log('To: ' + recipientEmail);
+    Logger.log('CC: ' + ccEmail);
+    Logger.log('ReplyTo: ' + replyToEmail);
+    
+    MailApp.sendEmail({
+      to: recipientEmail,
+      cc: ccEmail,
+      subject: subject,
+      body: body,
+      replyTo: replyToEmail
+    });
+    
+    Logger.log('✓ Email sent successfully to: ' + recipientEmail + ' and CC: ' + ccEmail);
+    return true;
+    
+  } catch (error) {
+    Logger.log('✗ ERROR in sendContactEmailWithMessage: ' + error.toString());
+    Logger.log('Error stack: ' + (error.stack || 'No stack trace'));
+    throw error; // Re-throw so caller can handle it
+  }
+}
+
+/**
  * Handle GET requests (form submissions sent as URL parameters)
  */
 function doGet(e) {
@@ -230,15 +290,31 @@ function doPost(e) {
       } else {
         // Individual form fields (this is what we're using now)
         Logger.log('No parameter.data found, using individual parameters...');
-        data = {
-          name: e.parameter.name || '',
-          phone: e.parameter.phone || '',
-          organizationName: e.parameter.organizationName || '',
-          organizationEmail: e.parameter.organizationEmail || ''
-        };
-        Logger.log('doPost: Received form data via individual parameters');
-        Logger.log('Raw values - name: "' + e.parameter.name + '", phone: "' + e.parameter.phone + '", org: "' + e.parameter.organizationName + '", email: "' + e.parameter.organizationEmail + '"');
-        Logger.log('Extracted - name: "' + data.name + '", phone: "' + data.phone + '", org: "' + data.organizationName + '", email: "' + data.organizationEmail + '"');
+        // Support both form formats:
+        // Old format: name, phone, organizationName, organizationEmail
+        // New format: firstName, lastName, email, phone, message
+        if (e.parameter.firstName || e.parameter.lastName) {
+          // New Contact Us page format
+          data = {
+            firstName: e.parameter.firstName || '',
+            lastName: e.parameter.lastName || '',
+            email: e.parameter.email || '',
+            phone: e.parameter.phone || '',
+            message: e.parameter.message || ''
+          };
+          Logger.log('doPost: Received Contact Us page form data');
+        } else {
+          // Old modal form format
+          data = {
+            name: e.parameter.name || '',
+            phone: e.parameter.phone || '',
+            organizationName: e.parameter.organizationName || '',
+            organizationEmail: e.parameter.organizationEmail || ''
+          };
+          Logger.log('doPost: Received modal contact form data');
+        }
+        Logger.log('Raw values: ' + JSON.stringify(e.parameter));
+        Logger.log('Extracted data: ' + JSON.stringify(data));
       }
       Logger.log('Final data object: ' + JSON.stringify(data));
     }
@@ -260,21 +336,50 @@ function doPost(e) {
       ).setMimeType(ContentService.MimeType.JSON);
     }
     
-    // Extract form fields
-    const name = data.name || 'Not provided';
-    const phone = data.phone || 'Not provided';
-    const organizationName = data.organizationName || 'Not provided';
-    const organizationEmail = data.organizationEmail || 'Not provided';
+    // Extract form fields - support both formats
+    let name, phone, organizationName, organizationEmail, firstName, lastName, email, message = '';
     
-    Logger.log('=== Extracted Form Data ===');
-    Logger.log('Name: "' + name + '"');
-    Logger.log('Phone: "' + phone + '"');
-    Logger.log('Organization: "' + organizationName + '"');
-    Logger.log('Email: "' + organizationEmail + '"');
+    if (data.firstName || data.lastName) {
+      // New Contact Us page format
+      firstName = data.firstName || '';
+      lastName = data.lastName || '';
+      email = data.email || '';
+      phone = data.phone || '';
+      message = data.message || '';
+      
+      // Combine firstName and lastName for email
+      name = (firstName + ' ' + lastName).trim() || 'Not provided';
+      organizationName = '';
+      organizationEmail = email || 'Not provided';
+      
+      Logger.log('=== Extracted Contact Us Form Data ===');
+      Logger.log('First Name: "' + firstName + '"');
+      Logger.log('Last Name: "' + lastName + '"');
+      Logger.log('Full Name: "' + name + '"');
+      Logger.log('Email: "' + email + '"');
+      Logger.log('Phone: "' + phone + '"');
+      Logger.log('Message: "' + message + '"');
+    } else {
+      // Old modal form format
+      name = data.name || 'Not provided';
+      phone = data.phone || 'Not provided';
+      organizationName = data.organizationName || 'Not provided';
+      organizationEmail = data.organizationEmail || 'Not provided';
+      
+      Logger.log('=== Extracted Modal Form Data ===');
+      Logger.log('Name: "' + name + '"');
+      Logger.log('Phone: "' + phone + '"');
+      Logger.log('Organization: "' + organizationName + '"');
+      Logger.log('Email: "' + organizationEmail + '"');
+    }
     
     // Validate that we have at least some data
-    if (name === 'Not provided' && phone === 'Not provided' && organizationName === 'Not provided' && organizationEmail === 'Not provided') {
-      Logger.log('ERROR: All fields are "Not provided" - data extraction failed!');
+    const hasData = (name && name !== 'Not provided') || (phone && phone !== 'Not provided') || 
+                    (organizationEmail && organizationEmail !== 'Not provided') ||
+                    (email && email !== '') || (firstName && firstName !== '');
+    
+    if (!hasData) {
+      Logger.log('ERROR: All fields are empty - data extraction failed!');
       return ContentService.createTextOutput(
         JSON.stringify({
           success: false,
@@ -286,8 +391,14 @@ function doPost(e) {
     
     // Send email using helper function
     try {
-      Logger.log('Calling sendContactEmail...');
-      const emailSent = sendContactEmail(name, phone, organizationName, organizationEmail);
+      Logger.log('Calling email function...');
+      let emailSent;
+      // For Contact Us page, include message in the email
+      if (message !== undefined && message !== '') {
+        emailSent = sendContactEmailWithMessage(name, phone, organizationName, organizationEmail, message);
+      } else {
+        emailSent = sendContactEmail(name, phone, organizationName, organizationEmail);
+      }
       
       if (emailSent) {
         Logger.log('✓ doPost completed successfully - email was sent');

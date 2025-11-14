@@ -23,7 +23,7 @@ export default {
         'gradient-team': 'linear-gradient(180deg, #141414 0%, #0f0514 50%, #141414 100%)',
       },
       fontFamily: {
-        sans: ['Open Sans', 'ui-sans-serif', 'system-ui'],
+        sans: ['Archivo', 'ui-sans-serif', 'system-ui'],
       },
       maxWidth: {
         'container': '1400px',

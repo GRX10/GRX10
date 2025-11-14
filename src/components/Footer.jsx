@@ -12,9 +12,11 @@ const Footer = () => {
               <img src="/logo.png" alt="GRX10 Logo" className="h-10" />
             </div>
             <div className="newsletter">
-              <h4 className="text-xl sm:text-2xl mb-2 font-bold text-white">
-                Get in touch
-              </h4>
+              <Link to="/contact-us">
+                <h4 className="text-xl sm:text-2xl mb-2 font-bold text-white hover:text-[#E1198B] transition-colors duration-300 cursor-pointer">
+                  Get in touch
+                </h4>
+              </Link>
               <p className="text-white mb-6 text-base">
                 {/* Sign up for the latest update and news */}
               </p>
@@ -51,9 +53,9 @@ const Footer = () => {
                 </a>
               </li>
               <li className="mb-3">
-                <a href="#contact" className="text-white no-underline transition-colors duration-300 text-[0.95rem] hover:text-[#E1198B]">
+                <Link to="/contact-us" className="text-white no-underline transition-colors duration-300 text-[0.95rem] hover:text-[#E1198B]">
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
