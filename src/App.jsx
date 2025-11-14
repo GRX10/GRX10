@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import VoiceAI from './pages/VoiceAI';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import LegalDisclaimer from './pages/LegalDisclaimer';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/voice-ai" element={<VoiceAI />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/legal-disclaimer" element={<LegalDisclaimer />} />
         </Routes>
         <Footer />
           </div>

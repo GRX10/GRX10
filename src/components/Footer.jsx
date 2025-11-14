@@ -122,9 +122,9 @@ const Footer = () => {
             <Link to="/privacy-policy" className="text-white no-underline transition-colors duration-300 text-sm hover:text-[#E1198B]">
               Privacy Policy
             </Link>
-            <a href="#legal" className="text-white no-underline transition-colors duration-300 text-sm hover:text-[#E1198B]">
+            <Link to="/legal-disclaimer" className="text-white no-underline transition-colors duration-300 text-sm hover:text-[#E1198B]">
               Legal Disclaimer
-            </a>
+            </Link>
           </div>
           <p className="text-white text-sm">
             &copy; 2025 GRX10 Solutions Private Limited
