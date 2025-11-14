@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 
 const ContactForm = ({ isOpen, onClose }) => {
+  // Google Apps Script Web App URL
+  const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL || '';
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -19,6 +22,8 @@ const ContactForm = ({ isOpen, onClose }) => {
     organizationName: false,
     organizationEmail: false
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState({ type: '', text: '' });
 
   const validatePhone = (phone) => {
     if (!phone.trim()) {
@@ -133,7 +138,7 @@ const ContactForm = ({ isOpen, onClose }) => {
     });
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     
     // Validate all fields before submission
@@ -165,28 +170,127 @@ const ContactForm = ({ isOpen, onClose }) => {
       return;
     }
     
-    console.log('Form submitted:', formData);
-    // Add your form submission logic here
-    onClose();
-    // Reset form
-    setFormData({
-      name: '',
-      phone: '',
-      organizationName: '',
-      organizationEmail: ''
-    });
-    setErrors({
-      name: '',
-      phone: '',
-      organizationName: '',
-      organizationEmail: ''
-    });
-    setTouched({
-      name: false,
-      phone: false,
-      organizationName: false,
-      organizationEmail: false
-    });
+    setIsSubmitting(true);
+    setSubmitMessage({ type: '', text: '' });
+
+    // Check if Google Script URL is configured
+    if (!GOOGLE_SCRIPT_URL) {
+      setSubmitMessage({ 
+        type: 'error', 
+        text: 'Email service not configured. Please check GOOGLE_APPS_SCRIPT_SETUP.md for setup instructions.' 
+      });
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      // Log the data being sent
+      console.log('Sending form data:', formData);
+      console.log('Google Script URL:', GOOGLE_SCRIPT_URL);
+
+      // Create a hidden iframe to receive the response
+      const iframe = document.createElement('iframe');
+      iframe.name = 'hiddenFrame';
+      iframe.id = 'hiddenFrame';
+      iframe.style.display = 'none';
+      iframe.style.width = '0';
+      iframe.style.height = '0';
+      iframe.style.border = 'none';
+      document.body.appendChild(iframe);
+      
+      // Create a form element
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = GOOGLE_SCRIPT_URL;
+      form.target = 'hiddenFrame';
+      form.style.display = 'none';
+      form.enctype = 'application/x-www-form-urlencoded';
+      
+      // Add individual form fields (more reliable than JSON)
+      const fields = [
+        { name: 'name', value: formData.name },
+        { name: 'phone', value: formData.phone },
+        { name: 'organizationName', value: formData.organizationName },
+        { name: 'organizationEmail', value: formData.organizationEmail }
+      ];
+      
+      fields.forEach(field => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = field.name;
+        input.value = field.value;
+        form.appendChild(input);
+      });
+      
+      // Add form to DOM, submit, then remove
+      document.body.appendChild(form);
+      console.log('Submitting form to:', GOOGLE_SCRIPT_URL);
+      console.log('Form fields:', fields);
+      
+      // Add load listener to iframe to detect when submission completes
+      iframe.onload = function() {
+        console.log('Form submission completed (iframe loaded)');
+      };
+      
+      iframe.onerror = function() {
+        console.error('Form submission error (iframe error)');
+      };
+      
+      form.submit();
+      console.log('Form submitted successfully');
+      
+      // Clean up after submission
+      setTimeout(() => {
+        if (document.body.contains(form)) {
+          document.body.removeChild(form);
+        }
+        if (document.body.contains(iframe)) {
+          document.body.removeChild(iframe);
+        }
+      }, 5000);
+
+      // Success
+      setSubmitMessage({ type: 'success', text: 'Thank you! Your message has been sent successfully.' });
+      
+      // Reset form after a short delay
+      setTimeout(() => {
+        setFormData({
+          name: '',
+          phone: '',
+          organizationName: '',
+          organizationEmail: ''
+        });
+        setErrors({
+          name: '',
+          phone: '',
+          organizationName: '',
+          organizationEmail: ''
+        });
+        setTouched({
+          name: false,
+          phone: false,
+          organizationName: false,
+          organizationEmail: false
+        });
+        setSubmitMessage({ type: '', text: '' });
+        onClose();
+      }, 2000);
+
+    } catch (error) {
+      console.error('Form Submission Error:', error);
+      
+      let errorMessage = 'Failed to send message. Please try again later.';
+      if (error.name === 'AbortError') {
+        errorMessage = 'Request timed out. Please check your connection and try again.';
+      }
+      
+      setSubmitMessage({ 
+        type: 'error', 
+        text: errorMessage
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (!isOpen) return null;
@@ -314,12 +418,28 @@ const ContactForm = ({ isOpen, onClose }) => {
             )}
           </div>
 
+          {/* Submit Message */}
+          {submitMessage.text && (
+            <div className={`mt-4 p-3 rounded-lg text-sm ${
+              submitMessage.type === 'success' 
+                ? 'bg-green-500/20 text-green-400' 
+                : 'bg-red-500/20 text-red-400'
+            }`}>
+              {submitMessage.text}
+            </div>
+          )}
+
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-white text-[#E1198B] font-bold py-3 px-6 rounded-lg hover:bg-white/90 transition-all duration-300 mt-6"
+            disabled={isSubmitting}
+            className={`w-full bg-white text-[#E1198B] font-bold py-3 px-6 rounded-lg transition-all duration-300 mt-6 ${
+              isSubmitting 
+                ? 'opacity-50 cursor-not-allowed' 
+                : 'hover:bg-white/90 cursor-pointer'
+            }`}
           >
-            Submit
+            {isSubmitting ? 'Sending...' : 'Submit'}
           </button>
         </form>
       </div>
