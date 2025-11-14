@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ContactForm from './ContactForm';
 
@@ -6,6 +6,29 @@ const Navbar = () => {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showContactForm, setShowContactForm] = useState(false);
+  const [isMobileScrolled, setIsMobileScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (typeof window === 'undefined') return;
+
+      const isMobile = window.innerWidth <= 768;
+      if (isMobile && window.scrollY > 10) {
+        setIsMobileScrolled(true);
+      } else {
+        setIsMobileScrolled(false);
+      }
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, []);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -16,10 +39,16 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 left-0 right-0 z-[1000] w-full bg-dark-bg py-6 transition-all duration-300">
+    <nav
+      className={`sticky top-0 left-0 right-0 z-[1000] w-full py-6 transition-all duration-300 max-md:fixed max-md:top-0 ${
+        isMobileScrolled 
+          ? 'bg-[#000000] shadow-[0_10px_30px_rgba(0,0,0,0.45)]' 
+          : 'bg-transparent md:bg-dark-bg'
+      }`}
+    >
       <div className="max-w-[1400px] mx-auto px-5 sm:px-6 md:px-8 lg:px-10 flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="flex items-center max-md:fixed max-md:top-6 max-md:left-5 max-md:z-[1002]">
+        <Link to="/" className="flex items-center relative z-[1002]">
           <img 
             src="/logo.png" 
             alt="GRX10 Logo" 
@@ -29,7 +58,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Toggle */}
         <button 
-          className="md:hidden max-md:fixed max-md:top-6 max-md:right-5 max-md:z-[1002] bg-transparent border-none text-white text-2xl cursor-pointer p-2"
+          className="md:hidden relative z-[1002] bg-transparent border-none text-white text-2xl cursor-pointer p-2"
           onClick={toggleMobileMenu} 
           aria-label="Toggle menu"
         >
