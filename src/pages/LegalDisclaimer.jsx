@@ -78,7 +78,7 @@ const LegalDisclaimer = () => {
   return (
     <section className="bg-dark-bg text-text-white pt-32 pb-20">
       <div className="max-w-[1400px] mx-auto px-5 sm:px-10 lg:px-12">
-        <h1 className="text-4xl md:text-5xl font-semibold leading-tight mb-6">Legal Disclaimer</h1>
+        <h1 className="text-4xl md:text-5xl font-semibold leading-tight mb-6 gradient-text">Legal Disclaimer</h1>
 
         <div className="space-y-10">
           {sections.map((section, index) => (
